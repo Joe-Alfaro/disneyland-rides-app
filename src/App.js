@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function App() {
+import Table from './components/table';
+
+const App = () => {
+  const [rides, setRides] = useState([]);
+
+  const getDisneylandRides = () => {
+    axios.get('http://localhost:8000/rides')
+      .then(res => setRides(res.data.filter(ride => ride.status !== 'Closed')))
+      .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getDisneylandRides()
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{margin: '25px auto', width: '90%'}} className="App">
+      {rides.length > 0
+        ? <Table rows={rides} />
+        : <h1>LOADING...</h1>
+      }
     </div>
-  );
+  )
 }
 
 export default App;
