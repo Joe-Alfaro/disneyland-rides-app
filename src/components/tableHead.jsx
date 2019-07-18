@@ -9,7 +9,7 @@ const headRows = [
   { id: 'name', numeric: false, label: 'Attraction' },
   { id: 'waitTime', numeric: true, label: 'Wait Time (minutes)' },
   { id: 'singleRider', numeric: true, label: 'Single Rider Available?' },
-  { id: 'fastPassStartTime', numeric: true, label: 'Fast Pass Return Time' }
+  { id: 'fastpassStartTime', numeric: true, label: 'Fast Pass Return Time' }
 ];
 
 const EnhancedTableHead = props => {
