@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
+import { loadCSS } from 'fg-loadcss';
+import Icon from '@material-ui/core/IconButton';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -47,12 +50,28 @@ const useStyles = makeStyles(theme => ({
   tableWrapper: {
     overflowX: 'auto',
   },
+  icon: {
+    margin: theme.spacing(2),
+    fontWeight: 100,
+    fontSize: '1rem',
+  },
+  hidden: {
+    visibility: 'none'
+  }
 }));
 
 const EnhancedTable = ({ rows }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+
+  useEffect(() => {
+    loadCSS(
+      'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
+      document.querySelector('#font-awesome-css'),
+    );
+  }, []);
 
   function handleRequestSort(event, property) {
     const isDesc = orderBy === property && order === 'desc';
@@ -88,7 +107,8 @@ const EnhancedTable = ({ rows }) => {
                       key={row.name}
                     >
                       <TableCell component="th" id={labelId} scope="row">
-                        {row.name}
+                        {row.name} 
+                        <Icon style={row.status !== 'Down' ? {visibility: 'hidden'} : null} className={clsx(classes.icon, 'fa fa-comment')} />
                       </TableCell>
                       <TableCell align="right">{
                         row.status === 'Down'

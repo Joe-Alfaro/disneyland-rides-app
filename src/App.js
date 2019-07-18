@@ -32,7 +32,7 @@ const App = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  });
 
   return (
     <div style={{margin: '25px auto', width: '90%'}} className="App">
