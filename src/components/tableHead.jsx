@@ -8,8 +8,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 const headRows = [
   { id: 'name', numeric: false, label: 'Attraction' },
   { id: 'waitTime', numeric: true, label: 'Wait Time (minutes)' },
-  { id: 'status', numeric: true, label: 'Status' },
-  { id: 'fastPass', numeric: true, label: 'Fast Pass' }
+  { id: 'singleRider', numeric: true, label: 'Single Rider Available?' },
+  { id: 'fastPassStartTime', numeric: true, label: 'Fast Pass Return Time' }
 ];
 
 const EnhancedTableHead = props => {

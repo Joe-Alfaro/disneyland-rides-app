@@ -1,11 +1,11 @@
 import React from 'react';
+import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
 import EnhancedTableHead from './tableHead';
 
 function desc(a, b, orderBy) {
@@ -90,9 +90,17 @@ const EnhancedTable = ({ rows }) => {
                       <TableCell component="th" id={labelId} scope="row">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.waitTime}</TableCell>
-                      <TableCell align="right">{row.status}</TableCell>
-                      <TableCell align="right">{row.fastPass ? 'Yes' : 'No'}</TableCell>
+                      <TableCell align="right">{
+                        row.status === 'Down'
+                          ? 'Temporarily Closed'
+                          : row.status === 'Closed'
+                            ? row.status
+                            : row.waitTime === 13
+                              ? 0
+                              : row.waitTime
+                      }</TableCell>
+                      <TableCell align="right">{row.singleRider ? 'Yes' : 'No'}</TableCell>
+                      <TableCell align="right">{row.fastpassStartTime === '23:59:59' ? '' : `${moment(row.fastpassStartTime, 'h:mm:ss').format('hh:mma')} - ${moment(row.fastpassEndTime, 'h:mm:ss').format('hh:mma')}`}</TableCell>
                     </TableRow>
                   );
                 })}
