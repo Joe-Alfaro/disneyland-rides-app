@@ -20,9 +20,8 @@ const App = () => {
               : ride.waitTime
           }
         }))
-        console.log(rides);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
     getDisneylandRides();
@@ -32,7 +31,7 @@ const App = () => {
     return () => {
       clearInterval(interval);
     };
-  });
+  }, []);
 
   return (
     <div style={{margin: '25px auto', width: '90%'}} className="App">
